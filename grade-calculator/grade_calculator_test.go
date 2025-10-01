@@ -66,11 +66,13 @@ func TestAddEssayGrade(t *testing.T) {
 	gradeCalculator := NewGradeCalculator()
 	gradeCalculator.AddGrade("essay on testing", 70, Essay)
 
-	if len(gradeCalculator.essays) != 1 {
-		t.Errorf("Expected 1 essay grade, got %d", len(gradeCalculator.essays))
+	essays := gradeCalculator.getGradesByType(Essay)
+
+	if len(essays) != 1 {
+		t.Errorf("Expected 1 essay grade, got %d", len(essays))
 	}
-	if gradeCalculator.essays[0].Grade != 70 {
-		t.Errorf("Expected essay grade 70, got %d", gradeCalculator.essays[0].Grade)
+	if essays[0].Grade != 70 {
+		t.Errorf("Expected essay grade 70, got %d", essays[0].Grade)
 	}
 }
 
