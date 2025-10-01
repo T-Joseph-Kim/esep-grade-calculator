@@ -113,3 +113,29 @@ func TestGetGradeD(t *testing.T) {
 		t.Errorf("Expected '%s'; got '%s'", expected_value, actual_value)
 	}
 }
+
+func TestGetPass(t *testing.T) {
+	gc := NewGradeCalculatorWithMode("passfail")
+
+	gc.AddGrade("assignment 1", 80, Assignment)
+	gc.AddGrade("exam 1", 75, Exam)
+	gc.AddGrade("essay 1", 70, Essay)
+
+	result := gc.GetFinalGrade()
+	if result != "Pass" {
+		t.Errorf("Expected 'Pass', got '%s'", result)
+	}
+}
+
+func TestGetFail(t *testing.T) {
+	gc := NewGradeCalculatorWithMode("passfail")
+
+	gc.AddGrade("assignment 1", 50, Assignment)
+	gc.AddGrade("exam 1", 40, Exam)
+	gc.AddGrade("essay 1", 55, Essay)
+
+	result := gc.GetFinalGrade()
+	if result != "Fail" {
+		t.Errorf("Expected 'Fail', got '%s'", result)
+	}
+}
